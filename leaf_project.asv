@@ -1,0 +1,232 @@
+
+clear; clc; close all;
+
+fprintf('Initializing Leaf Structural Array Database...\n\n');
+
+leaf_database = struct('ID', {}, ...
+                       'CommonName', {}, ...
+                       'ScientificName', {}, ...
+                       'LeafType', {}, ...
+                       'VenationPattern', {}, ...
+                       'MarginType', {}, ...
+                       'ApexShape', {}, ...
+                       'OriginalImage', {}, ...
+                       'GrayImage', {}, ...
+                       'BinaryMask', {}, ...
+                       'EdgeOutline', {});
+
+fig1=figure;
+imgD = imread('cassava_raw.jpeg');
+grayD = rgb2gray(imgD);
+
+hsvD = rgb2hsv(imgD);
+maskD = (hsvD(:,:,1) > 0.16 & hsvD(:,:,1) < 0.45) & (hsvD(:,:,2) > 0.20);
+maskD = imfill(bwareaopen(maskD, 120), 'holes');
+edgeD = edge(grayD, 'Canny', [0.04 0.12]);
+imshow(imgD);
+imshow(grayD);
+imshow(maskD);
+imshow(edgeD);
+
+leaf_database(1).ID = 1;
+leaf_database(1).CommonName = 'Cassava (Manioc)';
+leaf_database(1).ScientificName = 'Manihot esculenta';
+leaf_database(1).LeafType = 'Palmately Compound / Lobed';
+leaf_database(1).VenationPattern = 'Palmate';
+leaf_database(1).MarginType = 'Entire';
+leaf_database(1).ApexShape = 'Acuminate';
+leaf_database(1).OriginalImage = imgD;
+leaf_database(1).GrayImage = grayD;
+leaf_database(1).BinaryMask = maskD;
+leaf_database(1).EdgeOutline = edgeD; 
+%% 
+
+fig2=figure;
+imgH = imread('maize_raw.jpeg');
+grayH = rgb2gray(imgH);
+
+hsvH = rgb2hsv(imgH);
+maskH = (hsvH(:,:,1) > 0.16 & hsvH(:,:,1) < 0.42) & (hsvH(:,:,2) > 0.22);
+maskH = imfill(bwareaopen(maskH, 120), 'holes');
+edgeH = edge(grayH, 'Canny', [0.04 0.14]);
+imshow(imgH);
+imshow(grayH);
+imshow(maskH);
+imshow(edgeH);
+
+leaf_database(2).ID = 2;
+leaf_database(2).CommonName = 'Maize (Corn)';
+leaf_database(2).ScientificName = 'Zea mays';
+leaf_database(2).LeafType = 'Simple (Linear / Strap-like)';
+leaf_database(2).VenationPattern = 'Parallel';
+leaf_database(2).MarginType = 'Entire / Slightly Undulate';
+leaf_database(2).ApexShape = 'Acuminate';
+leaf_database(2).OriginalImage = imgH;
+leaf_database(2).GrayImage = grayH;
+leaf_database(2).BinaryMask = maskH;
+leaf_database(2).EdgeOutline = edgeH;
+%% 
+
+imgC = imread('candlebush_raw.jpeg');
+grayC = rgb2gray(imgC);
+
+hsvC = rgb2hsv(imgC);
+maskC = (hsvC(:,:,1) > 0.18 & hsvC(:,:,1) < 0.42) & (hsvC(:,:,2) > 0.25);
+maskC = imfill(bwareaopen(maskC, 80), 'holes');
+edgeC = edge(grayC, 'Sobel');
+imshow(imgC);
+imshow(grayC);
+imshow(maskC);
+imshow(edgeC);
+
+leaf_database(3).ID = 3;
+leaf_database(3).CommonName = 'candlebush';
+leaf_database(3).ScientificName = 'Senna siamea / Cassia siamea';
+leaf_database(3).LeafType = 'Pinnately Compound';
+leaf_database(3).VenationPattern = 'Pinnate';
+leaf_database(3).MarginType = 'Entire';
+leaf_database(3).ApexShape = 'Obtuse to Mucronate';
+leaf_database(3).OriginalImage = imgC;
+leaf_database(3).GrayImage = grayC;
+leaf_database(3).BinaryMask = maskC;
+leaf_database(3).EdgeOutline = edgeC;
+%% 
+fig3=figure;
+imgN = imread('yam_raw.jpeg');
+grayN = rgb2gray(imgN);
+
+hsvN = rgb2hsv(imgN);
+maskN = (hsvN(:,:,1) > 0.15 & hsvN(:,:,1) < 0.42) & (hsvN(:,:,2) > 0.20);
+maskN = imfill(bwareaopen(maskN, 150), 'holes');
+edgeN = edge(grayN, 'Canny', [0.05 0.15]);
+imshow(imgN);
+imshow(grayN);
+imshow(maskN);
+imshow(edgeN);
+
+leaf_database(4).ID = 4;
+leaf_database(4).CommonName = 'yam / Taro (Elephant Ear)';
+leaf_database(4).ScientificName = 'Colocasia esculenta / Xanthosoma sagittifolium';
+leaf_database(4).LeafType = 'Simple (Peltate / Cordate-Sagittate)';
+leaf_database(4).VenationPattern = 'Palmate-Pinnate (Prominent lateral ribs)';
+leaf_database(4).MarginType = 'Entire / Undulate';
+leaf_database(4).ApexShape = 'Acute to Cuspidate';
+leaf_database(4).OriginalImage = imgN;
+leaf_database(4).GrayImage = grayN;
+leaf_database(4).BinaryMask = maskN;
+leaf_database(4).EdgeOutline = edgeN;
+%% 
+imgM = imread('paw paw_raw.jpeg');
+grayM = rgb2gray(imgM);
+
+hsvM = rgb2hsv(imgM);
+maskM = (hsvM(:,:,1) > 0.15 & hsvM(:,:,1) < 0.42) & (hsvM(:,:,2) > 0.20);
+maskM = imfill(bwareaopen(maskM, 100), 'holes');
+edgeM = edge(grayM, 'Canny', [0.05 0.15]);imshow(imgN);
+imshow(grayM);
+imshow(maskM);
+imshow(edgeM);
+
+leaf_database(5).ID = 5;
+leaf_database(5).CommonName = 'Papaya / Pawpaw';
+leaf_database(5).ScientificName = 'Carica papaya';
+leaf_database(5).LeafType = 'Palmately Lobed (Deeply Incised)';
+leaf_database(5).VenationPattern = 'Palmate (Prominent yellow main veins)';
+leaf_database(5).MarginType = 'Lobed / Indented';
+leaf_database(5).ApexShape = 'Acuminate';
+leaf_database(5).OriginalImage = imgM;
+leaf_database(5).GrayImage = grayM;
+leaf_database(5).BinaryMask = maskM;
+leaf_database(5).EdgeOutline = edgeM;
+%% 
+
+ imgL = imread('ovacado_raw.jpeg');
+grayL = rgb2gray(imgL);
+
+hsvL = rgb2hsv(imgL);
+maskL = (hsvL(:,:,1) > 0.15 & hsvL(:,:,1) < 0.42) & (hsvL(:,:,2) > 0.20);
+maskL = imfill(bwareaopen(maskL, 100), 'holes');
+edgeL = edge(grayL, 'Canny', [0.05 0.15]);
+imshow(grayL);
+imshow(maskL);
+imshow(edgeL);
+
+leaf_database(6).ID = 6;
+leaf_database(6).CommonName = 'Avocado';
+leaf_database(6).ScientificName = 'Persea americana';
+leaf_database(6).LeafType = 'Simple';
+leaf_database(6).VenationPattern = 'Pinnate (Prominent pale midrib and veins)';
+leaf_database(6).MarginType = 'Entire / Undulate';
+leaf_database(6).ApexShape = 'Acute to Acuminate';
+leaf_database(6).OriginalImage = imgL;
+leaf_database(6).GrayImage = grayL;
+leaf_database(6).BinaryMask = maskL;
+leaf_database(6).EdgeOutline = edgeL;
+%% 
+
+imgK = imread('orange_raw.jpeg');
+grayK = rgb2gray(imgK);
+
+hsvK = rgb2hsv(imgK);
+maskK = (hsvK(:,:,1) > 0.15 & hsvK(:,:,1) < 0.42) & (hsvK(:,:,2) > 0.20);
+maskK = imfill(bwareaopen(maskK, 100), 'holes');
+edgeK = edge(grayK, 'Canny', [0.05 0.15]);
+imshow(grayK);
+imshow(maskK);
+imshow(edgeK);
+
+leaf_database(7).ID = 7;
+leaf_database(7).CommonName = 'Orange / Citrus';
+leaf_database(7).ScientificName = 'Citrus sinensis';
+leaf_database(7).LeafType = 'Unifoliolate (Simple with winged petiole)';
+leaf_database(7).VenationPattern = 'Pinnate';
+leaf_database(7).MarginType = 'Entire to slightly crenulate';
+leaf_database(7).ApexShape = 'Acute to Subacuminate';
+leaf_database(7).OriginalImage = imgK;
+leaf_database(7).GrayImage = grayK;
+leaf_database(7).BinaryMask = maskK;
+leaf_database(7).EdgeOutline = edgeK;
+%% 
+imgI = imread('mango_raw.jpeg');
+grayI = rgb2gray(imgI);
+
+hsvI = rgb2hsv(imgI);
+maskI = (hsvI(:,:,1) > 0.16 & hsvI(:,:,1) < 0.42) & (hsvI(:,:,2) > 0.22);
+maskI = imfill(bwareaopen(maskI, 100), 'holes');
+edgeI = edge(grayI, 'Canny', [0.05 0.15]);
+imshow(grayI);
+imshow(maskI);
+imshow(edgeI);
+
+leaf_database(8).ID = 8;
+leaf_database(8).CommonName = 'Mango';
+leaf_database(8).ScientificName = 'Mangifera indica';
+leaf_database(8).LeafType = 'Simple';
+leaf_database(8).VenationPattern = 'Pinnate';
+leaf_database(8).MarginType = 'Entire / Undulate';
+leaf_database(8).ApexShape = 'Acuminate';
+leaf_database(8).OriginalImage = imgI;
+leaf_database(8).GrayImage = grayI;
+leaf_database(8).BinaryMask = maskI;
+leaf_database(8).EdgeOutline = edgeI;
+%% 
+imgG = imread('fene.jpeg');
+grayG = rgb2gray(imgG);
+
+% Image Processing Onramp techniques (Green channel thresholding & Canny edge)
+hsvG = rgb2hsv(imgG);
+maskG = (hsvG(:,:,1) > 0.15 & hsvG(:,:,1) < 0.42) & (hsvG(:,:,2) > 0.20);
+maskG = imfill(bwareaopen(maskG, 100), 'holes');
+edgeG = edge(grayG, 'Canny', [0.05 0.15]);
+
+leaf_database(7).ID = 7;
+leaf_database(7).CommonName = 'Jackfruit (Fene)';
+leaf_database(7).ScientificName = 'Artocarpus heterophyllus';
+leaf_database(7).LeafType = 'Simple';
+leaf_database(7).VenationPattern = 'Pinnate';
+leaf_database(7).MarginType = 'Entire';
+leaf_database(7).ApexShape = 'Obtuse to Subacute';
+leaf_database(7).OriginalImage = imgG;
+leaf_database(7).GrayImage = grayG;
+leaf_database(7).BinaryMask = maskG;
+leaf_database(7).EdgeOutline = edgeG;
